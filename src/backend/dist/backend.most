@@ -1,0 +1,92 @@
+// Version: 1.0.0
+type AccessCode__909626008 = Text;
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DownloadToken__829826769 = Text;
+type ExternalBlob__246066408 = Blob;
+type FileId__283657257 = Text;
+type FileInternal__840483338 =
+  {
+    blob : ExternalBlob__246066408;
+    folderId : FolderId__432322121;
+    id : FileId__283657257;
+    mimeType : Text;
+    name : Text;
+    owner : Principal;
+    size : Nat;
+    uploadedAt : Timestamp__301639476
+  };
+type FolderId__432322121 = Text;
+type FolderInternal__463328364 =
+  {
+    accessCode : AccessCode__909626008;
+    createdAt : Timestamp__301639476;
+    var fileCount : Nat;
+    id : FolderId__432322121;
+    var name : Text;
+    owner : Principal;
+    var priceInCents : Nat
+  };
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type PaymentRecord__879948694 =
+  {
+    createdAt : Timestamp__301639476;
+    var downloadToken : ?DownloadToken__829826769;
+    folderId : FolderId__432322121;
+    var status : PaymentStatus__296016569;
+    stripeSessionId : StripeSessionId__642050422
+  };
+type PaymentStatus__296016569 = {#completed; #failed; #pending};
+type ProfileInternal__741928561 =
+  {var email : Text; var name : Text; principal : Principal};
+type StripeConfiguration__96897619 =
+  {allowedCountries : [Text]; secretKey : Text};
+type StripeSessionId__642050422 = Text;
+type Timestamp__301639476 = Int;
+type UserRole__1054455867 = {#admin; #guest; #user};
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1054455867>
+    };
+  stable downloadTokens :
+    {
+      var root : Node__46230540<DownloadToken__829826769, FolderId__432322121>;
+      var size : Nat__490723111
+    };
+  stable files :
+    {
+      var root : Node__46230540<FileId__283657257, FileInternal__840483338>;
+      var size : Nat__490723111
+    };
+  stable folderCounters : {var nextFileId : Nat; var nextFolderId : Nat};
+  stable folders :
+    {
+      var root :
+        Node__46230540<FolderId__432322121, FolderInternal__463328364>;
+      var size : Nat__490723111
+    };
+  stable payments :
+    {
+      var root :
+        Node__46230540<StripeSessionId__642050422, PaymentRecord__879948694>;
+      var size : Nat__490723111
+    };
+  stable profiles :
+    {
+      var root : Node__46230540<Principal, ProfileInternal__741928561>;
+      var size : Nat__490723111
+    };
+  stable var stripeConfig : ?StripeConfiguration__96897619
+};

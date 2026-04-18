@@ -1,0 +1,23 @@
+{
+  "overview": "SnapVault is a photographer client delivery platform where photographers upload photos and videos, organize them into client folders, set prices, and generate unique access codes. Clients use the code to pay and download their content — no account needed.",
+  "features": [
+    "Photographer dashboard with folder and file management",
+    "Drag-and-drop photo and video uploads",
+    "Unique access codes per client folder",
+    "Stripe payment integration before download",
+    "Client download page with image previews and batch download",
+    "Responsive home page with code entry for clients",
+    "Photographer profile and settings management",
+    "Secure file storage and access control"
+  ],
+  "category": "productivity",
+  "tags": [
+    "photography",
+    "file-delivery",
+    "client-portal",
+    "payments",
+    "uploads",
+    "media"
+  ],
+  "last_updated": "2026-04-18T22:11:36.207Z"
+}
